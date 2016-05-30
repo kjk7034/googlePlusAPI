@@ -98,9 +98,7 @@ const Google = {
 				}
 			}
 			componentDidMount() {
-				if (this.props.userId) {
-					this.fetch(this.props.userId);
-				}
+				this.fetch();
 			}
 			fetch() {
 				var model = new Google.Model.User();
@@ -122,7 +120,10 @@ const Google = {
 					);
 				}
 				return (
-					<div className="userId">User ID : {this.state.fetchData.id}</div>
+					<div className="userWrap">
+						<h1 className="userId">User ID : {this.state.fetchData.id}</h1>
+						<Google.View.UserFeed accessToken={this.props.accessToken} postId={this.state.fetchData.id} />
+					</div>
 				)
 			}
 		},
@@ -133,9 +134,7 @@ const Google = {
 				}
 			}
 			componentDidMount() {
-				if (this.props.postId) {
-					this.fetch(this.props.postId);
-				}
+				this.fetch(this.props.postId);
 			}
 			fetch(userId) {
 				var collection = new Google.Model.UserFeed(null, {
@@ -214,16 +213,10 @@ class GoogleApp extends React.Component {
 		this.state = {
 		}
 	}
-	componentDidMount() {
-		this.refs.user.fetch().then((response) => {
-			return this.refs.userFeed.fetch(response.id);
-		});
-	}
 	render() {
 		return (
-			<div>
-				<Google.View.User accessToken={this.props.accessToken} ref='user' />
-				<Google.View.UserFeed accessToken={this.props.accessToken} ref='userFeed' />
+			<div className="wrapper">
+				<Google.View.User accessToken={this.props.accessToken} />
 			</div>
 		);
 	}
@@ -231,6 +224,6 @@ class GoogleApp extends React.Component {
 
 
 ReactDOM.render(
-	<GoogleApp accessToken='ya29.CjHyAq4gCLDESj_2s7mdIvRUsZYFFYtfO5uftCQ8L8OpZJg3TIX7C2vjUJQSMS9-CWAX' />,
+	<GoogleApp accessToken='ya29.CjHyAjtiHXoy6WLkNVFrWP5VB8QMT0IMFdXOpU_5L7eqFkrYwFpCtkeOMLIloPZKXYe_' />,
 	document.getElementById('container')
 );

@@ -1,4 +1,4 @@
-#container {padding:10px;}
+.wrapper {padding:10px;}
 img {
     max-width: 100%;
     height: auto;
@@ -32,10 +32,6 @@ img {
     padding: 10px;
     border:1px solid #333;
     margin-bottom: 10px;
-}
-.totalCommentCount{
-    padding:10px;
-    margin-bottom:5px;
 }
 
 @keyframes spin {
